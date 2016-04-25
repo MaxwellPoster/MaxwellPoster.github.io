@@ -2,14 +2,14 @@ BattleWatch.Preloader = function (game) {
     this.preloadBar = null;
     this.titleText = null;
     this.ready = false;
-}
+},
 BattleWatch.Preloader.prototype = {
     preload: function () {
         this.preloadBar = this.add.sprite(this.world.centerX, this.world.centerY, 'preloaderBar');
         this.preloadBar.anchor.setTo(0.5,0.5);
         this.titleText=this.add.image(this.world.centerX, this.world.centerY -220, 'titleimage');
         this.titleText.anchor.setTo(0.5, 0.5);
-        this.load.image('titlescreen', 'images/TitleBG.png');
+        this.load.image('titlescreen', 'images/menu/Battle_Watch.png');
         this.load.bitmapFont('eightbitwonder', 'fonts/eightbitwonder.png', 'fonts/eightbitwonder.fnt');
         game.load.spritesheet('G1','images/G1.png');
         game.load.spritesheet('G2','images/G2.png');

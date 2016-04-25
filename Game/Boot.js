@@ -2,8 +2,8 @@ var BattleWatch = {};
 BattleWatch.boot=function(game) {};
 BattleWatch.boot.prototype = {
     preload: function () {
-        this.load.image('preloaderBar', 'images/loader_bar.png');
-        this.load.image('titleimage', 'images/title_image.png')
+        this.load.image('preloaderBar', 'images/menu/loaderbar.png');
+        this.load.image('titleimage', 'images/menu/Battle_Watch.png')
     },
     create: function () {
         this.input.maxPointers = 1;
