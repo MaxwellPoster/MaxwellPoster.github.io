@@ -5,7 +5,7 @@
         <meta name="mobile-web-app-capable" content="yes">
         <link rel="icon" sizes="256x256" href=##TBD>
         <title>BattleWatch</title>
-        <script src="libs/phaser.js"></script>
+        <script src="plugins/phaser.js"></script>
         <script src="Boot.js"></script>
         <srcipt src="Preloader.js"></srcipt>
         <script src="StartMenu.js"></script>
@@ -22,7 +22,7 @@
         <div id="gameContainer"></div>
         <script type="text/javascript">
         window.onload = function() {
-        var game = new Phaser.Game(540, 960, Phaser.AUTO, 'gameContainer');
+        var game = new Phaser.Game(1600, 900, Phaser.AUTO, 'gameContainer');
         game.state.add('Boot', BattleWatch.Boot);
         game.state.add('Preloader', BattleWatch.Preloader);
         game.state.add('Startmenu', BattleWatch.Startmenu);

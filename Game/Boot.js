@@ -1,6 +1,6 @@
 var BattleWatch = {};
 BattleWatch.boot=function(game) {};
-BattleWatch.Boot.prototype = {
+BattleWatch.boot.prototype = {
     preload: function () {
         this.load.image('preloaderBar', 'images/loader_bar.png');
         this.load.image('titleimage', 'images/title_image.png')
