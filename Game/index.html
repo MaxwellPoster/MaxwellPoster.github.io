@@ -7,7 +7,7 @@
         <title>BattleWatch</title>
         <script src="plugins/phaser.js"></script>
         <script src="Boot.js"></script>
-        <srcipt src="Preloader.js"></srcipt>
+        <script src="Preloader.js"></script>
         <script src="StartMenu.js"></script>
         <script src="Game.js"></script>
         <style>
@@ -23,11 +23,11 @@
         <script type="text/javascript">
         window.onload = function() {
         var game = new Phaser.Game(1600, 900, Phaser.AUTO, 'gameContainer');
-        this.state.add('Boot', BattleWatch.Boot);
-        this.state.add('Preloader', BattleWatch.Preloader);
-        this.state.add('Startmenu', BattleWatch.Startmenu);
-        this.state.add('Game', BattleWatch.Game);
-        this.state.start('Boot');
+        game.state.add('Boot', BattleWatch.Boot);
+        game.state.add('Preloader', BattleWatch.Preloader);
+        game.state.add('StartMenu', BattleWatch.StartMenu);
+        game.state.add('Game', BattleWatch.Game)
+        game.state.start('Boot');
         }
         </script>
     </body>
