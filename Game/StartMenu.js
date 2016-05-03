@@ -3,6 +3,7 @@ BattleWatch.StartMenu = function(game){
 };
 BattleWatch.StartMenu.prototype={
     create: function(){
-        startBG=this.add.image(0,0,'titlescreen');
+        this.stage.backgroundColor = '#00FFFF'
+        startBG=this.add.image(0,0,'titleimage');
     }
 }
