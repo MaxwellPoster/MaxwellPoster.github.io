@@ -24,13 +24,7 @@ BattleWatch.Preloader.prototype = {
         this.load.spritesheet('M6','images/characters/M6.png');
         this.load.image('Axe','images/weapons/Axe.png');
         this.load.image('Axe_Bloody','images/weapons/Axe_Bloody.png');
-        this.load.image('Sward','images/weapons/Sward.png');
-        this.load.image('Sward_Bloody','images/weapons/Sward_Bloody.png');
-        this.titleButtons= function () {
-        this.load.image('start', 'images/menu/start.png');
-        this.load.image('Menu', 'images/menu/menu.png');
-        this.load.image('Credit', 'images/menu/credit.png')
-        };
-        this.state.start('StartMenu')
-    },
-}
+        this.load.image('Sward','images/weapons/Sward.png'); this.load.image('Sward_Bloody','images/weapons/Sward_Bloody.png');
+        this.state.start('StartMenu');
+        }
+    }
