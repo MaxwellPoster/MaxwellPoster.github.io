@@ -45,4 +45,6 @@ Essential Functions
 
 >> This function switches to a side by side veiw and allows charcters t engage in battle
 
+>> http://phaser.io/examples/v2/sprites/move-a-sprite link to move sprite
+
 
