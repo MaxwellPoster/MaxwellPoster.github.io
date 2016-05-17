@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 BattleWatch.Game = function (game) {
     this.gamestatus; //is the game over?
     this.inventory; //Inventory manager INC item pickup(possibly other function for pickup?)
@@ -13,4 +14,56 @@ BattleWatch.Game = function (game) {
 };
 BattleWatch.Game.prototype = {
     
+=======
+//var game = new Phaser.Game(1440, 900, Phaser.CANVAS, {preload: preload});
+
+//function preload(){
+//    game.load.FifthGirl('sprite', 'asseta/Sprites/')
+//}
+
+var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'phaser-example', { preload: preload, create: create, update: update, render: render });
+
+function preload() {
+    game.load.atlasJSONHash('bot', 'assets/sprites/running_bot.png', 'assets/sprites/running_bot.json');
+}
+
+var s;
+
+function create() {
+
+    s = game.add.sprite(game.world.centerX, game.world.centerY, 'bot');
+    s.anchor.setTo(0.5, 0.5);
+    s.scale.setTo(2, 2);
+
+    s.animations.add('run');
+    s.animations.play('run', 10, true);
+
+}
+
+function update() {
+
+    if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT))
+    {
+        s.x -= 4;
+    }
+    else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT))
+    {
+        s.x += 4;
+    }
+
+    if (game.input.keyboard.isDown(Phaser.Keyboard.UP))
+    {
+        s.y -= 4;
+    }
+    else if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN))
+    {
+        s.y += 4;
+    }
+
+}
+
+function render() {
+    game.debug.spriteInfo(s, 20, 32);
+
+>>>>>>> 17b535dc3c21e1a1c7b17e321086021bd5453b29
 }
