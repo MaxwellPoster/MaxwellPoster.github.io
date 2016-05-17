@@ -1,4 +1,4 @@
-BattleWatch.StartMenu = function(game){
+BattleWatch.StartMenu = function (game) {
     this.startTitle;
     this.gamestart;
     this.startGame;
