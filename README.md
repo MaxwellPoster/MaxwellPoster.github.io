@@ -48,5 +48,5 @@ Essential Functions
 >> http://phaser.io/examples/v2/sprites/move-a-sprite link to move sprite
 
 
-Here is the link to our live game test: [click here](MaxwellPoster.github.io/Game)
+Here is the link to our live game test: [click here](http://MaxwellPoster.github.io/Game)
 
