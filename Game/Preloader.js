@@ -5,8 +5,11 @@ BattleWatch.Preloader = function (game) {
 };
 BattleWatch.Preloader.prototype = {
     preload: function () {
-        this.preloadBar = this.add.sprite(this.world.centerX, this.world.centerY,'preloaderbar');
-        this.preloadBar.anchor.setTo(0,0);
+        this.preloadBar = this.add.sprite(this.world.centerX, this.world.centerY,'preloadBar');
+        this.preloadBar.anchor.setTo(0.5);
+        this.load.setPreloadSprite(this.preloadBar);
+        //this.load.tilemap('level1', 'images/tilemap/maperino.json', null, Phaser.Tilemap.TILED_JSON);
+        //this.load.image('gameTiles', 'images/tilemap/tiles.png')
         this.titleText=this.add.image(this.world.centerX, this.world.centerY, 'titleimage','images/menu/Battle_Watch.png');
         this.scale.fullscreenscalemode = Phaser.ScaleManager.SHOW_ALL;
         this.load.bitmapFont('eightbitwonder', 'fonts/eightbitwonder.png', 'fonts/eightbitwonder.fnt');

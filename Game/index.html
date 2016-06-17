@@ -10,6 +10,7 @@
         <script src="Preloader.js"></script>
         <script src="StartMenu.js"></script>
         <script src="Game.js"></script>
+        <script src="Main.js"></script>
         <style>
             body {
                 padding: 0;
@@ -19,16 +20,7 @@
         </style>
     </head>
     <body>
-        <div id="gameContainer"></div>
-        <script type="text/javascript">
-        window.onload = function() {
-        var game = new Phaser.Game(1440, 900, Phaser.AUTO, 'gameContainer');
-        game.state.add('Boot', BattleWatch.Boot);
-        game.state.add('Preloader', BattleWatch.Preloader);
-        game.state.add('StartMenu', BattleWatch.StartMenu);
-        game.state.add('Game', BattleWatch.Game)
-        game.state.start('Boot');
-        }
+        <script src="Main.js">
         </script>
     </body>
 </html>

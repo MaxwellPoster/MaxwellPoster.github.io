@@ -1,77 +1,78 @@
-BattleWatch.Game = function (game) {
-    this.gamestatus; //is the game over?
-    this.inventory; //Inventory manager INC item pickup(possibly other function for pickup?)
-    this.movement; //handles player movement
-    this.attack; //handles player attack inputs
-    this.ai; //handles ai movement + combat
-    this.ent; //handles crate destructions (gibs?) 
-    this.timer; //we should put a timer in a corner and if they survive for X amount of time, they should start a new round
-    this.playercount; //number somewhere on screen indicating how many AI are left, and if 0 are left, should start a new round
-    this.musicloop; //start music loop (feat. skrr bradshaw)
-    this.ouch; //Handles listening for damage to player, also health manager (IE if health < 0; gameover)
-    this.gameover; //Gameover screen, then return to main menu
-};
+var BattleWatch = BattleWatch || {};
+BattleWatch.Game = function(){};
 BattleWatch.Game.prototype = {
-    
-//var game = new Phaser.Game(1440, 900, Phaser.CANVAS, {preload: preload});
-
-//function preload(){
-//    game.load.FifthGirl('sprite', 'asseta/Sprites/')
-//}
-BattleWatch.Game = function (game) {
-    this.gamestatus; //is the game over?
-    this.inventory; //Inventory manager INC item pickup(possibly other function for pickup?)
-    this.movement; //handles player movement
-    this.attack; //handles player attack inputs
-    this.ai; //handles ai movement + combat
-    this.ent; //handles crate destructions (gibs?) 
-    this.timer; //we should put a timer in a corner and if they survive for X amount of time, they should start a new round
-    this.playercount; //number somewhere on screen indicating how many AI are left, and if 0 are left, should start a new round
-    this.musicloop; //start music loop (feat. skrr bradshaw)
-    this.ouch; //Handles listening for damage to player, also health manager (IE if health < 0; gameover)
-    this.gameover; //Gameover screen, then return to main menu;
-}
-
-var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'phaser-example', { preload: preload, create: create, update: update, render: render });
-
-function preload() {
-    game.load.atlasJSONHash('bot', 'assets/sprites/running_bot.png', 'assets/sprites/running_bot.json');
-}
-
-var s;
-
-function create() {
-
-    s = game.add.sprite(game.world.centerX, game.world.centerY, 'bot');
-    s.anchor.setTo(0.5, 0.5);
-    s.scale.setTo(2, 2);
-
-    s.animations.add('run');
-    s.animations.play('run', 10, true);
-
-}
-
-function update() {
-
-    if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT))
-    {
-        s.x -= 4;
-    }
-    else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT))
-    {
-        s.x += 4;
-    }
-
-    if (game.input.keyboard.isDown(Phaser.Keyboard.UP))
-    {
-        s.y -= 4;
-    }
-    else if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN))
-    {
-        s.y += 4;
-    }
-
-}
-
-function render() {
-    game.debug.spriteInfo(s, 20, 32);
+    create: function() {
+        this.map = this.game.add.tilemap('level1');
+        this.map.addTilesetImage('tiles', 'gameTiles');
+        this.backgroundlayer = this.map.createLayer('backgroundLayer');
+        this.blockedLayer = this.map.createLayer('blockedLayer');
+        this.map.setCollisionBetween(1,10000, true, 'blockedLayer');
+        this.backgroundlayer.resizeWorld();
+        this.createItems();
+        this.createEnemies();
+        var result = this.findObjectsByType('playerStart', this.map, 'objectsLayer')
+        this.player = this.game.add.sprite(result[0].x, result[0].y, 'player');
+        this.game.physics.arcade.enable(this.player);
+        this.cursors = this.game.input.keyboard.createCursorKeys();
+        
+    },
+    createItems: function() {
+        this.items = this.game.add.group();
+        this.items.enableBody = true;
+        var item;
+        result = this.findObjectsByType('item', this.map, 'objectsLayer');
+        result.forEach(function(element){
+            this.createFromTiledObject(element, this.items);
+        }, this);
+        },
+    createEnemies: function() {
+        this.enemy = this.game.add.group();
+        this.enemy.enableBody = true;
+        var enemy;
+        result = this.findObjectsByType('enemy', this.map, 'objectsLayer');
+        result.forEach(function(element){
+            this.createFromTiledObject(element, this.enemy);
+        }, this);
+    },
+findObjectsByType: function(type, map, layer) {
+    var result = new Array();
+    map.objects[layer].forEach(function(element){
+                               if(element.properties.type === type) {
+        element.y -= map.tileHeight;
+        result.push(element);
+                               }
+    });
+    return result;
+},
+    createFromTiledObject: function(element, group) {
+        var sprite = group.create(element.x, element.y, element.properties.sprite);
+     Object.keys(element.properties).forEach(function(key){
+         sprite[key] = element.properties[key];
+     });
+    },
+    update: function() {
+        this.game.physics.arcade.collide(this.player, this.blockedLayer);
+        this.game.physics.arcade.overlap(this.player, this.items, //insert collectible here
+                                         null, this);
+        this.player.body.velocity.x = 0;
+        if(this.cursors.up.isDown){
+            if(this.player.body.velocity.y == 0)
+                this.player.body.velocity.y -= 150;
+        }
+        else if(this.cursors.down.isDown){
+            if(this.player.body.velocity.y == 0)
+                this.player.body.velocity.y += 150;
+        }
+        else {
+            this.player.body.velocity.y =0;
+        }
+        if(this.cursors.left.isDown){
+            if(this.player.body.velocity.x == 0)
+                this.player.body.velocity.x -= 150;
+        }
+        else if(this.cursors.right.isDown){
+            if(this.player.body.velocity.x == 0)
+                this.player.body.velocity.x += 150;
+        }
+        },
+    };
